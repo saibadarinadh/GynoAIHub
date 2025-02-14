@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f7fb;
+}
+
+.chat-container {
+    width: 60%;
+    max-width: 500px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bot-message,
+.user-message {
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #e8f0fe;
+    color: #333;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #007bff;
+    color: white;
+}
+
+.input-container {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    gap: 10px;
+    background-color: #fafafa;
+    align-items: center; /* Aligns input and button vertically */
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #007bff;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex; /* Ensure consistent alignment */
+    align-items: center; /* Aligns text vertically */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.upload-container {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center; /* Aligns upload button vertically */
+    gap: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #fafafa;
+}
+
+label.upload-label {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

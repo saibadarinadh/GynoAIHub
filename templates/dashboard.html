@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Health Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f6fa;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #3182ce;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #3182ce;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #e8e8e8;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #3182ce, #8e44ad);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #8e44ad, #3182ce);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+        }
+
+        .section-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #3182ce;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Women's Health Portal</h1>
+        <p>Comprehensive care for women's health and wellness</p>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Diagnostic Tools</h2>
+            <div class="section-content">
+                <p class="section-description">Access our advanced diagnostic tools for various conditions.</p>
+                <a href="{{ url_for('cervical_cancer') }}" class="button">Cervical Cancer Screening</a>
+                <a href="{{ url_for('pcos_detection') }}" class="button">PCOS Detection</a>
+                <a href="{{ url_for('pdf_upload') }}" class="button">Medical Report Upload</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Health Assistant</h2>
+            <div class="section-content">
+                <p class="section-description">Connect with our AI-powered health assistant for immediate support and
+                    guidance.</p>
+                <a href="{{ url_for('chatbot') }}" class="button">Connect with Assistant</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Resources</h2>
+            <div class="section-content">
+                <p class="section-description">Access educational materials and health resources.</p>
+                <a href="{{ url_for('Articles') }}" class="button">Health Articles</a>
+
+                <a href="{{ url_for('faq_page') }}" class="button">FAQ</a>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+import tensorflow as tf
+from tensorflow.keras.preprocessing.image import load_img, img_to_array
+import numpy as np
+
+# Load the saved model
+model = tf.keras.models.load_model('C:/Users/Badari/OneDrive/Desktop/projects/girls/final_model.keras')
+
+# Function to preprocess the image for prediction
+def prepare_image(image_path):
+    # Load the image
+    img = load_img(image_path, target_size=(128, 128))  # Resize to the same size used during training
+    img_array = img_to_array(img)  # Convert the image to an array
+    img_array = img_array / 255.0  # Normalize the image
+    img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
+    return img_array
+
+# Function to predict the class of the image
+def predict_image(image_path):
+    # Prepare the image
+    prepared_image = prepare_image(image_path)
+    # Make prediction
+    prediction = model.predict(prepared_image)
+    # Convert prediction to binary class (0 or 1)
+    predicted_class = (prediction[0] > 0.5).astype("int32")  # Use prediction[0] directly
+    return predicted_class
+
+# Example usage
+image_path = 'C:/Users/Badari/Downloads/PCOS detection using ultrasound images/data/test/infected/img_0_9985.jpg'  # Replace with the path to your image
+result = predict_image(image_path)
+
+if result == 1:
+    print("The image is not infected.")
+else:
+    print("The image is infected.")

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cervical Cancer Detection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 0.5rem 1rem;
+            background-color: #3182ce;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #2b6cb0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 2rem;
+            background-color: transparent;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .file-input-container {
+            width: 100%;
+            position: relative;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: #f0f2f5;
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .file-input-label:hover {
+            background: #e2e8f0;
+            border-color: #718096;
+        }
+
+        .preview-container {
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 300px;
+            display: none;
+        }
+
+        #imagePreview {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button[type="submit"] {
+            background: #4299e1;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button[type="submit"]:hover {
+            background: #3182ce;
+            transform: translateY(-1px);
+        }
+
+        .prediction {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .prediction-text {
+            font-size: 1.2rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-name {
+            margin-top: 0.5rem;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: none;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back to Dashboard Button -->
+    <a href="{{ url_for('dashboard') }}" class="back-button">← Back to Dashboard</a>
+
+    <div class="container">
+        <h1>Cervical Cancer Detection</h1>
+        <div class="upload-container">
+            <form action="{{ url_for('cervical_cancer') }}" method="POST" enctype="multipart/form-data" id="uploadForm">
+                <div class="file-input-container">
+                    <label for="imageInput" class="file-input-label">
+                        Choose an image or drag & drop here
+                    </label>
+                    <input type="file" name="image" accept="image/*" required id="imageInput">
+                    <div class="file-name" id="fileName"></div>
+                </div>
+                
+                <div class="preview-container" id="previewContainer">
+                    <img id="imagePreview" src="#" alt="Preview">
+                </div>
+
+                <button type="submit">Detect Cervical Cancer</button>
+            </form>
+            <div class="loading" id="loadingSpinner"></div>
+        </div>
+
+        {% if predicted_class %}
+        <div class="prediction">
+            <div class="prediction-text">{{ predicted_class }}</div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewContainer = document.getElementById('previewContainer');
+        const fileName = document.getElementById('fileName');
+        const uploadForm = document.getElementById('uploadForm');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                fileName.textContent = file.name;
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                }
+                
+                reader.readAsDataURL(file);
+            }
+        });
+
+        uploadForm.addEventListener('submit', function() {
+            loadingSpinner.style.display = 'block';
+        });
+
+        // Drag and drop functionality
+        const fileInputLabel = document.querySelector('.file-input-label');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileInputLabel.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileInputLabel.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileInputLabel.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            fileInputLabel.style.backgroundColor = '#e2e8f0';
+            fileInputLabel.style.borderColor = '#4299e1';
+        }
+
+        function unhighlight(e) {
+            fileInputLabel.style.backgroundColor = '#f0f2f5';
+            fileInputLabel.style.borderColor = '#cbd5e0';
+        }
+
+        fileInputLabel.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const file = dt.files[0];
+            imageInput.files = dt.files;
+            
+            if (file) {
+                fileName.textContent = file.name;
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                }
+                
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>

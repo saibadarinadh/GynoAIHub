@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PDF - Gynecological Condition Predictor</title>
+</head>
+<body>
+    <h1>Upload Your PDF File</h1>
+    <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+        <label for="pdf">Select PDF file:</label>
+        <input type="file" name="pdf" accept=".pdf" required>
+        <button type="submit">Upload</button>
+    </form>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>

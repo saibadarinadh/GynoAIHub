@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Health - FAQ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f6fa;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #3182ce;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            font-size: 1.2rem;
+            color: #3182ce;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .answer {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #3182ce;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background-color: #2c5282;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('dashboard') }}" class="back-button">← Back to Dashboard</a>
+
+
+        
+        <div class="header">
+            <h1>Frequently Asked Questions</h1>
+        </div>
+
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="question">What is PCOS and what are its common symptoms?</div>
+                <div class="answer">
+                    PCOS (Polycystic Ovary Syndrome) is a hormonal disorder common among women of reproductive age. Common symptoms include:
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Irregular periods</li>
+                        <li>Excess androgen levels leading to acne and excess hair growth</li>
+                        <li>Weight gain</li>
+                        <li>Difficulty getting pregnant</li>
+                        <li>Multiple small cysts on the ovaries</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">How often should I get a cervical cancer screening?</div>
+                <div class="answer">
+                    The general guidelines for cervical cancer screening are:
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Ages 21-29: Pap test every 3 years</li>
+                        <li>Ages 30-65: Pap test and HPV test every 5 years, or Pap test alone every 3 years</li>
+                        <li>Over 65: May stop screening if previous tests were normal</li>
+                    </ul>
+                    However, your doctor might recommend a different schedule based on your personal health history.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">What should I expect during my first gynecological visit?</div>
+                <div class="answer">
+                    Your first gynecological visit typically includes:
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Discussion about your medical history and menstrual cycle</li>
+                        <li>General health check including weight, blood pressure, etc.</li>
+                        <li>Discussion about any concerns you may have</li>
+                        <li>Information about preventive care</li>
+                        <li>A physical exam may or may not be necessary depending on your age and circumstances</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">What are the early signs of pregnancy?</div>
+                <div class="answer">
+                    Common early signs of pregnancy include:
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Missed period</li>
+                        <li>Breast tenderness</li>
+                        <li>Nausea/morning sickness</li>
+                        <li>Fatigue</li>
+                        <li>Frequent urination</li>
+                        <li>Mood changes</li>
+                    </ul>
+                    If you experience these symptoms and suspect pregnancy, take a home pregnancy test or consult your healthcare provider.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">How can I maintain good reproductive health?</div>
+                <div class="answer">
+                    To maintain good reproductive health:
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Schedule regular check-ups with your gynecologist</li>
+                        <li>Practice safe sex and use protection</li>
+                        <li>Maintain a healthy diet and exercise routine</li>
+                        <li>Stay up to date with vaccinations (including HPV)</li>
+                        <li>Practice good hygiene</li>
+                        <li>Track your menstrual cycle</li>
+                        <li>Seek medical attention if you notice unusual symptoms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

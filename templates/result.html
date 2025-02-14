@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result - Gynecological Condition Predictor</title>
+</head>
+<body>
+    <h1>Prediction Result</h1>
+    <p>Based on the symptoms extracted from "{{ pdf_filename }}":</p>
+    <ul>
+        <li><strong>Disorder:</strong> {{ predictions['Disorder'] }}</li>
+        <li><strong>Treatment Recommendation:</strong> {{ predictions['Treatment Recommendation'] }}</li>
+        <li><strong>Precautions:</strong> {{ predictions['Precautions'] }}</li>
+        <li><strong>Food Intake Recommendation:</strong> {{ predictions['Food Intake Recommendation'] }}</li>
+    </ul>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>
