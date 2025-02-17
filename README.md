@@ -2,9 +2,12 @@
 
 This project is an end-to-end application built with Flask for diagnosing and predicting various women's health conditions. It integrates machine learning models, deep learning models, PDF generation, and image-based detection tools to assist in medical reporting and decision support.
 
+
+
 ## Project Structure
 
-- **Root Files**
+- **Root Files**  
+  
   - [app.py](app.py): The main Flask application that handles routing, uploads, predictions, and interacts with the machine learning models.
   - [pdf_generate.py](pdf_generate.py): A standalone script to generate medical reports using ReportLab.
   - **Data Files**
@@ -40,6 +43,8 @@ This project is an end-to-end application built with Flask for diagnosing and pr
 
 ## Key Features
 
+
+
 - **Medical Prediction Engine**  
   Uses machine learning and deep learning to predict disorders, treatment recommendations, precautions, food intake suggestions, and more based on extracted symptoms from PDFs or images. See the prediction logic in [app.py](app.py) and [backend/gynaecology.ipynb](backend/gynaecology.ipynb).
 
@@ -54,7 +59,14 @@ This project is an end-to-end application built with Flask for diagnosing and pr
 
 ## Setup and Usage
 
+![Setup](/home1.png)
+![Setup](/login.png)
+![Setup](/main.png)
+![Setup](/chat.png)
+
 1. **Install Dependencies**  
    Ensure you have Python installed and install the required packages:
    ```sh
    pip install -r requirements.txt
+   ```
+
